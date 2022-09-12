@@ -14,4 +14,4 @@ Created in Unity 3D by Árnilsen Arthur as a small college project
 - Reliable
 - Lightweight
 
-
+![Main Game](https://github.com/arnilsenarthur/UnityChessGame/blob/main/Media/MainGif.gif?raw=true)
