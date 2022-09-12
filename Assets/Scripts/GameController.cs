@@ -41,6 +41,7 @@ namespace Game
         #region State
         public BoardState state;
         public Vector2Int selectedPiece;
+        public List<GameObject> piecesToDestroy = new List<GameObject>();
         public List<Move> selectedPieceMoves;
         public bool waiting = false;
         public BoardStateBuffer buffer;
@@ -193,11 +194,12 @@ namespace Game
                     OpenMenu();
             }
 
-            if(Input.GetKeyDown(KeyCode.S))
+            if(Input.GetKey(KeyCode.LeftShift))
             {
-                StockfishSearch search = new StockfishSearch();
-                search.fen = state.GetFEN();
-                stockfishQueue.Enqueue(search);
+                if(Input.GetKeyDown(KeyCode.Alpha1))
+                {
+                    Restart("r3k2r/8/8/8/8/8/8/R3K2R w kqKQ - 0 0");
+                }
             }
 
             moveAnimationLength = animationLengthSlider.value;
@@ -290,13 +292,18 @@ namespace Game
         }
         #endregion
 
-        public void Restart()
+        public void Restart(string fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 0")
         {
             waiting = false;
             StopAllCoroutines();
-            LoadFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
+            LoadFEN(fen);
             promotionMenu.SetActive(false);
             stockfishQueue.Clear();
+
+            foreach(GameObject o in piecesToDestroy)
+                Destroy(o);
+
+            piecesToDestroy.Clear();
         }
 
         #region UI
@@ -586,6 +593,11 @@ namespace Game
             piece.gameObject.transform.position = to;
             #endregion
 
+            if(pieceCaptured != null)
+            {
+                piecesToDestroy.Add(pieceCaptured.gameObject);
+            }
+
             #region EnPassant Move / Capature
             if(piece.type == 'p' || piece.type == 'P')
             {
@@ -731,6 +743,7 @@ namespace Game
                     //yield return new WaitForSeconds(captureDestroyAfter);
                 }
 
+                piecesToDestroy.Remove(pieceCaptured.gameObject);
                 Destroy(pieceCaptured.gameObject);
             }      
             #endregion
