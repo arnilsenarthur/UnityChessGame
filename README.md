@@ -12,4 +12,6 @@ Created in Unity 3D by Árnilsen Arthur as a small college project
 - Stockfish support
 - Fast
 - Reliable
-- Light
+- Lightweight
+
+
