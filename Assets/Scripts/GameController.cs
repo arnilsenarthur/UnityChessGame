@@ -609,7 +609,7 @@ namespace Game
                     int y = state.enPassantPosition.y == 2 ? 3 : 4;
 
                     pieceCaptured = state[move.to.x, y];
-                    state[move.from.x, y] = null;
+                    state[move.to.x, y] = null;
                     pieceCaptured.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 }
 

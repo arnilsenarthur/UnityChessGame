@@ -18,6 +18,10 @@ namespace Game.Controllers
                     GameController.instance.DoMove(GameController.instance.autoPlayerNextMoves[0]);
                     GameController.instance.autoPlayerNextMoves.RemoveAt(0);
                 }
+                else
+                {
+                    GameController.instance.whitePlayer = GameController.instance.blackPlayer = new DefaultPlayerController();
+                }
             }
         }
     }

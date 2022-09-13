@@ -287,6 +287,15 @@ namespace Game
             if(fen.Length != 6)
                 throw new Exception("Invalid FEN! Expected: <pieces> <nextmove> <castling> <en-passant> <halfmoves> <fullmoves>");
 
+            #region Load Castle
+            string castling = fen[2];
+
+            whiteCastleKingside = castling.Contains('K');
+            whiteCastleQueenside = castling.Contains('Q');
+            blackCastleKingside = castling.Contains('k');
+            blackCastleQueenside = castling.Contains('q');
+            #endregion
+
             #region Load Board Pieces
             string[] ranks = fen[0].Split('/');
 
@@ -331,15 +340,6 @@ namespace Game
                 currentPlayer = 'b';
             else 
                 throw new Exception($"Invalid FEN! Invalid current player {fen[1]}");
-            #endregion
-
-            #region Load Castle
-            string castling = fen[2];
-
-            whiteCastleKingside = castling.Contains('K');
-            whiteCastleQueenside = castling.Contains('Q');
-            blackCastleKingside = castling.Contains('k');
-            blackCastleQueenside = castling.Contains('q');
             #endregion
 
             #region Load Current EnPassant

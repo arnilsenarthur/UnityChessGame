@@ -25,10 +25,10 @@ namespace Game.Populators
                 }
 
                 if(state.IsMovable(piece,f + 1, r + 1, state) && state.enPassantPosition.x == f + 1 && state.enPassantPosition.y == r + 1)
-                    yield return new MoveBuilder().Piece('P').From(f, r).To(f + 1, r + 1).Promoting(r == 6).Build();
+                    yield return new MoveBuilder().Piece('P').From(f, r).To(f + 1, r + 1).Capturing().Promoting(r == 6).Build();
 
                 if(state.IsMovable(piece,f - 1, r + 1, state) && state.enPassantPosition.x == f - 1 && state.enPassantPosition.y == r + 1)
-                    yield return new MoveBuilder().Piece('P').From(f, r).To(f - 1, r + 1).Promoting(r == 6).Build();
+                    yield return new MoveBuilder().Piece('P').From(f, r).To(f - 1, r + 1).Capturing().Promoting(r == 6).Build();
 
                 if(state.IsMovable(piece,f + 1, r + 1, state) && !state.IsEmpty(f + 1, r + 1, state))
                     yield return new MoveBuilder().Piece('P').From(f, r).To(f + 1, r + 1).Promoting(r == 6).Capturing().Build();
@@ -53,10 +53,10 @@ namespace Game.Populators
                 } 
 
                 if(state.IsMovable(piece,f + 1, r - 1, state) && state.enPassantPosition.x == f + 1 && state.enPassantPosition.y == r - 1)
-                    yield return new MoveBuilder().Piece('P').From(f, r).To(f + 1, r - 1).Promoting(r == 1).Build();
+                    yield return new MoveBuilder().Piece('P').From(f, r).To(f + 1, r - 1).Capturing().Promoting(r == 1).Build();
 
                 if(state.IsMovable(piece,f - 1, r - 1, state) && state.enPassantPosition.x == f - 1 && state.enPassantPosition.y == r - 1)
-                    yield return new MoveBuilder().Piece('P').From(f, r).To(f - 1, r - 1).Promoting(r == 1).Build();   
+                    yield return new MoveBuilder().Piece('P').From(f, r).To(f - 1, r - 1).Capturing().Promoting(r == 1).Build();   
 
                 if(state.IsMovable(piece,f + 1, r - 1, state) && !state.IsEmpty(f + 1, r - 1, state))
                     yield return new MoveBuilder().Piece('P').From(f, r).To(f + 1, r - 1).Promoting(r == 1).Capturing().Build();
